@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Lab Task · I2T2</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="wrap">
+      <a class="brand" href="index.html">I2T2<span>.</span></a>
+      <nav>
+        <a href="index.html#intro">Introduction</a>
+        <a href="index.html#department">Department</a>
+        <a href="index.html#blog" class="active">Blog</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <main class="article">
+      <section>
+        <a class="back" href="index.html#blog">← Back to blog</a>
+        <br>
+        <span class="pill sky">Lab</span>
+        <h1>Home Project</h1>
+        <p class="meta">Oct 27, 2026 · 3 min read</p>
+
+        <h3>A brief description of the task</h3>
+        <p>The task is to build an IT system that provides the most widely used services, where users have the ability to share files and visit a self-managed website.</p>
+        <p>This task requires a Linux server where you can store documents and other files, but in a way so that only authorized users can access it. Managing users should be handled in a centralized system (directory). On the server, a (virtual) shared printer must be configured to allow users to print.</p>
+        <p>It is also necessary to install a web service where the company's own website will appear. It is arbitrary whether a file or group work server will be installed.</p>
+        <p>There is a need to make a client (primarily for Windows, but for Linux as well), which is attached to the file server domain so that it can be accessed with the user accounts managed there. To ease the user's work, it must be resolved on the client machine to automatically see the shared (drive or attachment folder) at login and provide basic user programs: Office, Browser, and so on.</p>
+        <p>In addition, you need to secure your server's backup and administration: a simplified data backup that automatically saves the data stored on the server to another location in the evening, allows administrators to remotely access the server, set up a monitor that will at least monitor standard hardware (CPU, RAM...).</p>
+
+        <h3>Example use</h3>
+        <p>The system described in this task describes the IT system of a small or an average-sized company as these services are widely used. Some (not all) of the Linux Server and its associated user licenses are additional one-off costs so you can not afford to buy them in smaller companies.</p>
+        <p><strong>Note:</strong> Simplifying the task makes it possible to install all the services on two servers on a single network, but so many services are typically installed on multiple servers and a network (DMZ) is available on the web.</p>
+      </section>
+    </main>
+
+    <footer>Lab Operating System · Nguyen Quang Huy, Do Bao Nhi</footer>
+  </div>
+</body>
+</html>

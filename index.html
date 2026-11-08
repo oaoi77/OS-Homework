@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Company I2T2</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="wrap">
+      <a class="brand" href="index.html">I2T2<span>.</span></a>
+      <nav>
+        <a href="#intro">Introduction</a>
+        <a href="#department">Department</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="hero">
+      <h1 class="logo">I2T2<span>.</span></h1>
+      <p class="tagline">Intermediate 2 — Team 2</p>
+    </div>
+
+    <main class="grid">
+      <section class="full" id="intro">
+        <h2>Introduction</h2>
+        <p class="lead">I2T2 stands for task Intermediate 2 of Team 2</p>
+      </section>
+
+      <section class="full" id="blog">
+        <h2>Blog</h2>
+        <div class="posts">
+          <a class="post-card" href="blog-1.html">
+            <span class="pill pink">Team</span>
+            <h3>Hello from Team 2</h3>
+            <p>Who we are, what I2T2 is about, and how our three departments work together.</p>
+            <span class="meta">Oct 20, 2026 · 2 min read</span>
+            <span class="read-more">Read more →</span>
+          </a>
+          <a class="post-card" href="blog-2.html">
+            <span class="pill sky">Lab</span>
+            <h3>Our lab task: an IT system for a small company</h3>
+            <p>File sharing, centralized users, a shared printer, a company website, backups and monitoring — all on Linux.</p>
+            <span class="meta">Oct 27, 2026 · 3 min read</span>
+            <span class="read-more">Read more →</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="full" id="department">
+        <h2>Department</h2>
+        <!-- Avatar mặc định; có thể thay src bằng ảnh thật, ví dụ img/hr1.jpg -->
+        <div class="depts">
+          <button class="dept-tab peach" aria-expanded="false" aria-controls="staff-hr">
+            <span><strong>Human Resource</strong><small>3 members</small></span>
+            <span class="arrow">▾</span>
+          </button>
+          <button class="dept-tab mint" aria-expanded="false" aria-controls="staff-sales">
+            <span><strong>Sales</strong><small>3 members</small></span>
+            <span class="arrow">▾</span>
+          </button>
+          <button class="dept-tab sky" aria-expanded="false" aria-controls="staff-mkt">
+            <span><strong>Marketing</strong><small>3 members</small></span>
+            <span class="arrow">▾</span>
+          </button>
+        </div>
+
+        <ul class="staff" id="staff-hr" hidden>
+          <li><img src="image/cat-hr.jpg" alt="hr1"><strong>hr1</strong></li>
+          <li><img src="avatar.svg" alt="hr2"><strong>hr2</strong></li>
+          <li><img src="image/hr3.avif" alt="hr3"><strong>hr3</strong></li>
+        </ul>
+        <ul class="staff" id="staff-sales" hidden>
+          <li><img src="avatar.svg" alt="sale1"><strong>sale1</strong></li>
+          <li><img src="avatar.svg" alt="sale2"><strong>sale2</strong></li>
+          <li><img src="avatar.svg" alt="sale3"><strong>sale3</strong></li>
+        </ul>
+        <ul class="staff" id="staff-mkt" hidden>
+          <li><img src="avatar.svg" alt="mkt1"><strong>mkt1</strong></li>
+          <li><img src="avatar.svg" alt="mkt2"><strong>mkt2</strong></li>
+          <li><img src="avatar.svg" alt="mkt3"><strong>mkt3</strong></li>
+        </ul>
+      </section>
+
+      <section class="full" id="contact">
+        <h2>Contact</h2>
+        <form class="contact-form" id="contact-form">
+          <input type="checkbox" name="botcheck" style="display: none">
+
+          <input type="text" name="name" placeholder="Your name" required>
+          <input type="email" name="email" placeholder="Your email" required>
+          <textarea name="message" placeholder="Your message" required></textarea>
+          <button type="submit">Send message</button>
+          <p class="form-status" id="form-status"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer>Lab Operating System · Nguyen Quang Huy, Do Bao Nhi</footer>
+  </div>
+
+  <script>
+    // Department: bấm vào tên phòng ban để hiện / ẩn nhân sự
+    const tabs = document.querySelectorAll('.dept-tab');
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const open = tab.getAttribute('aria-expanded') === 'true';
+        tabs.forEach((t) => {
+          t.setAttribute('aria-expanded', 'false');
+          document.getElementById(t.getAttribute('aria-controls')).hidden = true;
+        });
+        if (!open) {
+          tab.setAttribute('aria-expanded', 'true');
+          document.getElementById(tab.getAttribute('aria-controls')).hidden = false;
+        }
+      });
+    });
+
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const button = form.querySelector('button');
+      button.disabled = true;
+      status.className = 'form-status';
+      status.textContent = 'Sending...';
+
+      try {
+        const res = await fetch('contact.php', {
+          method: 'POST',
+          body: new FormData(form)
+        });
+        const data = await res.json();
+        if (!data.success) throw new Error(data.message);
+        status.className = 'form-status ok';
+        status.textContent = 'Thanks! Your message has been sent.';
+        form.reset();
+      } catch (err) {
+        status.className = 'form-status err';
+        status.textContent = 'Something went wrong. Please try again.';
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
